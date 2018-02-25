@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="wy.test01.ExXUtils3">
+    tools:context="com.wy.androidstudy.ExXUtils3">
     <RadioGroup
         android:layout_width="57dp"
         android:layout_height="171dp"

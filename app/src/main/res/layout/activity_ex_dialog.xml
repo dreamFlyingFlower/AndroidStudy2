@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="wy.test01.ExDialog">
+    tools:context="com.wy.androidstudy.ExDialog">
 
     <Button
         android:id="@+id/button"

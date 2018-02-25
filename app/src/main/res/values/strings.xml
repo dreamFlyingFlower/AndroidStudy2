@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">AndroidStudy</string>
+    <string name="prompt_loginname">请输入用户名</string>
+    <string name="prompt_password">请输入密码</string>
+    <string name="action_sign_in_short">登录</string>
+    <string name="action_sign_in">登录</string>
 </resources>
