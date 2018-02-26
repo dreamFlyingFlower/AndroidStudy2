@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.wy.androidstudy">
+    package="com.wy">
 
     <application
         android:allowBackup="true"
@@ -9,17 +9,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".base.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ExClick" />
-        <activity android:name=".ExEvent"></activity>
-        <!--广播注册-->
-        <receiver android:name=".ExBroadReceive"/>
+        <activity android:name=".base.ExClick" />
+        <activity android:name=".base.ExEvent" />
+        <!-- 广播注册 -->
+        <receiver android:name=".base.ExBroadReceive" />
+        <!-- content资源认证注册,name表示文件路劲,anthorities认证的唯一标识,紧接在content://之后 -->
+        <provider
+            android:name=".sqllite.Sqllite"
+            android:authorities="com.wy.sqllite.provider" />
+
+        <activity android:name=".base.ExNotification"></activity>
     </application>
 
 </manifest>

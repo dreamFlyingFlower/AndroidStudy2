@@ -1,4 +1,4 @@
-package com.wy.androidstudy;
+package com.wy.base;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

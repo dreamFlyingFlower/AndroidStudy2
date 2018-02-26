@@ -1,4 +1,4 @@
-package com.wy.androidstudy;
+package com.wy.base;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
