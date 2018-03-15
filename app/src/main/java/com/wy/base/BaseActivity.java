@@ -5,17 +5,14 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.wy.R;
 
-/**
- * 快捷键
- * ctrl+alt+L:代码格式化
- * alt+enter:手动导包
- * alt+insert:重写各种方法,实现发现
- */
-public class MainActivity extends AppCompatActivity {
+import org.xutils.view.annotation.ContentView;
+
+@ContentView(R.layout.activity_base)
+public class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+
     }
 }
