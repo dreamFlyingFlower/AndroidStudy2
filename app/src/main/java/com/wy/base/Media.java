@@ -40,15 +40,23 @@ public class Media extends AppCompatActivity {
     private void playMedia(View view){
         // 播放放在资源文件中的媒体文件
         mp = MediaPlayer.create(getApplicationContext(),R.raw.test);
+        // 监听播放是否完成,进行循环播放
+        mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                mp.start();
+                mp.setLooping(true);
+            }
+        });
         // 播放sdk文件中的资源
-        try {
-            MediaPlayer mp1 = new MediaPlayer();
-            mp1.setDataSource("/sdcard/test.mp3");
-            mp1.prepare();
-            mp1.start();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            MediaPlayer mp1 = new MediaPlayer();
+//            mp1.setDataSource("/sdcard/test.mp3");
+//            mp1.prepare();
+//            mp1.start();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
         if(mp.isPlaying()) {
             mp.stop();
         }
