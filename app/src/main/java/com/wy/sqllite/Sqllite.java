@@ -20,8 +20,8 @@ import android.support.annotation.Nullable;
  * content://contacts/people 返回设备上所有的联系人
  * content://contancs/people/45 返回设备上id为45的联系人
  */
-public class Sqllite extends ContentProvider{
-//    初始化
+public class Sqllite extends ContentProvider {
+    //    初始化
     @Override
     public boolean onCreate() {
         return false;

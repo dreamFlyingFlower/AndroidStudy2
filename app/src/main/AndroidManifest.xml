@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.wy">
+    <!-- 权限读取 -->
+    <!-- gps定位权限,精准,但是耗电,在有遮挡物的地方信号不好 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- 手机基站定位,误差较大,在有遮挡物的地方仍可使用 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -9,7 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".base.MainActivity">
+        <activity android:name=".base.Media">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,7 +30,11 @@
             android:name=".sqllite.Sqllite"
             android:authorities="com.wy.sqllite.provider" />
 
-        <activity android:name=".base.ExNotification"></activity>
+        <activity android:name=".base.ExNotification" />
+        <activity
+            android:name=".base.ExGMap"
+            android:label="@string/title_activity_ex_gmap"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
