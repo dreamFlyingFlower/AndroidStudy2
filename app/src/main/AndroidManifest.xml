@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.wy">
+    package="com.wy" android:versionCode="1" android:versionName="1.0.0">
     <!-- 权限读取 -->
     <!-- gps定位权限,精准,但是耗电,在有遮挡物的地方信号不好 -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <!-- 手机基站定位,误差较大,在有遮挡物的地方仍可使用 -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!--打电话的权限-->
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <!--发送短信,短信过长的时候需要进行截取分段-->
+    <uses-permission android:name="android.permission.SEND_SMS"/>
 
     <application
         android:allowBackup="true"
