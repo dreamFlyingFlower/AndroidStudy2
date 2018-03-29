@@ -5,15 +5,22 @@ package com.wy.sqllite;
  */
 
 import android.content.ContentProvider;
+import android.content.ContentUris;
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import java.util.List;
+
 /**
  * content uri资源定位符
- * 固定格式content://com.wy.sqllite/user/12  content://固定格式,后面接唯一标识,user代表数据库,12代表数据中的id
+ * 固定格式content://com.wy.sqllite.provider/user/12
+ * content://固定格式,后面接唯一标识,user代表数据库,12代表数据中的id
  * user可以没有,则访问所有数据库,12没有则访问user中所有数据
  * 在manif文件中需要注册,注册的name就是继承了contentprovider的路劲
  * content://media/internal/images 这个uri可以返回设备上存储的所有图片
@@ -21,37 +28,64 @@ import android.support.annotation.Nullable;
  * content://contancs/people/45 返回设备上id为45的联系人
  */
 public class Sqllite extends ContentProvider {
+
+    SQLiteOpenHelper dbHelper = null;
     //    初始化
     @Override
     public boolean onCreate() {
-        return false;
+        dbHelper = new DBUtils(getContext(),"test.db,",null,1);
+        return true;
     }
 
     @Nullable
     @Override
-    public Cursor query(@NonNull Uri uri, @Nullable String[] projection, @Nullable String selection, @Nullable String[] selectionArgs, @Nullable String sortOrder) {
+    public Cursor query(@NonNull Uri uri, @Nullable String[] projection, @Nullable String selection,
+                        @Nullable String[] selectionArgs, @Nullable String sortOrder) {
+        // 获得uri后面的参数列表,从第一个斜杠后面的参数开始,若有表明,则第一个位置是表明,第二个位置是id
+        List<String> segments = uri.getPathSegments();
+        if (segments.size() > 1){
+            for(String param : segments){
+                System.out.print(param);
+            }
+        }
         return null;
     }
 
     @Nullable
     @Override
     public String getType(@NonNull Uri uri) {
+
         return null;
     }
 
     @Nullable
     @Override
     public Uri insert(@NonNull Uri uri, @Nullable ContentValues values) {
-        return null;
+        // 获得数据库访问
+        SQLiteDatabase database = dbHelper.getWritableDatabase();
+        // 忘数据库中插入数据,返回插入后生成的id
+        long rowid = database.insert("user", null, values);
+        if(rowid > 0){
+            // 将原始uri和生成的id拼接后返回
+            Uri uri1 = ContentUris.withAppendedId(uri, rowid);
+            // 通知其他应用数据改变
+            getContext().getContentResolver().notifyChange(uri1,null);
+            return uri1;
+        }else{
+            throw  new SQLException("数据插入失败");
+        }
     }
 
     @Override
     public int delete(@NonNull Uri uri, @Nullable String selection, @Nullable String[] selectionArgs) {
+        getContext().getContentResolver().notifyChange(uri,null);
         return 0;
     }
 
     @Override
-    public int update(@NonNull Uri uri, @Nullable ContentValues values, @Nullable String selection, @Nullable String[] selectionArgs) {
+    public int update(@NonNull Uri uri, @Nullable ContentValues values, @Nullable String selection,
+                      @Nullable String[] selectionArgs) {
+        getContext().getContentResolver().notifyChange(uri,null);
         return 0;
     }
 }
