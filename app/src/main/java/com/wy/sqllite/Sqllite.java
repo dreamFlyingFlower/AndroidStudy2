@@ -12,8 +12,10 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.net.Uri;
+import android.nfc.Tag;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import java.util.List;
 
@@ -28,7 +30,7 @@ import java.util.List;
  * content://contancs/people/45 返回设备上id为45的联系人
  */
 public class Sqllite extends ContentProvider {
-
+    private static final String TAG="sqllite";
     SQLiteOpenHelper dbHelper = null;
     //    初始化
     @Override
@@ -37,6 +39,14 @@ public class Sqllite extends ContentProvider {
         return true;
     }
 
+    /**
+     * 查询
+     * @param uri 标识符
+     * @param projection 需要拿到的字段名
+     * @param selection where条件,可带?,也可写死
+     * @param selectionArgs 对应where条件里的?
+     * @param sortOrder 排序语句,如name desc
+     */
     @Nullable
     @Override
     public Cursor query(@NonNull Uri uri, @Nullable String[] projection, @Nullable String selection,
@@ -45,10 +55,23 @@ public class Sqllite extends ContentProvider {
         List<String> segments = uri.getPathSegments();
         if (segments.size() > 1){
             for(String param : segments){
-                System.out.print(param);
+                Log.i(TAG,param);
             }
         }
-        return null;
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        Cursor cursor = db.query("test", projection, selection, selectionArgs, null, null, sortOrder);
+        cursor.moveToNext();
+        StringBuffer sb = new StringBuffer();
+        while(!cursor.isAfterLast()){
+            int id = cursor.getInt(0);
+            String name = cursor.getString(1);
+            cursor.moveToNext();
+            sb.append(id);
+            sb.append(name);
+            Log.i(TAG,sb.toString());
+        }
+        cursor.close();
+        return cursor;
     }
 
     @Nullable
@@ -76,16 +99,42 @@ public class Sqllite extends ContentProvider {
         }
     }
 
+    /**
+     * 删除数据
+     * @param uri 标识符,可从中拿到表名
+     * @param selection where里面的条件,不带where,可带?,也可直接写死
+     * @param selectionArgs ?对应的值,只能是字符串
+     */
     @Override
     public int delete(@NonNull Uri uri, @Nullable String selection, @Nullable String[] selectionArgs) {
-        getContext().getContentResolver().notifyChange(uri,null);
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        // 当?是字符串时可用占位符,若是为数字,则直接写死,参数传null
+        int row = db.delete(selection, "name=?", selectionArgs);
+        if(row > 0){
+            Uri res = ContentUris.withAppendedId(uri,row);
+            getContext().getContentResolver().notifyChange(res,null);
+            return row;
+        }
         return 0;
     }
 
+    /**
+     * 更新数据库
+     * @param uri 标识符,可从中拿到表名
+     * @param values 需要更新的内容
+     * @param selection where里面的条件,不带where,可带?,也可直接写死
+     * @param selectionArgs 对应问号的值,只能是字符串
+     */
     @Override
     public int update(@NonNull Uri uri, @Nullable ContentValues values, @Nullable String selection,
                       @Nullable String[] selectionArgs) {
-        getContext().getContentResolver().notifyChange(uri,null);
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        int update = db.update("test", values, selection, selectionArgs);
+        if (update > 0){
+            Uri res = ContentUris.withAppendedId(uri,update);
+            getContext().getContentResolver().notifyChange(res,null);
+            return update;
+        }
         return 0;
     }
 }
