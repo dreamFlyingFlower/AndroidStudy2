@@ -2,9 +2,11 @@ package com.wy.base;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v4.view.LayoutInflaterFactory;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -129,7 +131,7 @@ public class ExDialog extends AppCompatActivity {
      *
      * @param view
      */
-//    @Event(value = R.id.button)
+    @Event(value = R.id.button)
     private void clickSingle(View view) {
         new AlertDialog.Builder(ExDialog.this)
                 .setIcon(R.drawable.test01)
@@ -169,7 +171,7 @@ public class ExDialog extends AppCompatActivity {
      *
      * @param view
      */
-//    @Event(value = R.id.button)
+    @Event(value = R.id.button)
     private void clickMulti(View view) {
         new AlertDialog.Builder(ExDialog.this)
                 .setIcon(R.drawable.test01)
@@ -198,5 +200,45 @@ public class ExDialog extends AppCompatActivity {
 
             }
         }).show();
+    }
+
+    /**
+     * 点击的时候弹出一个可以输入文字的对话框
+     * @param view
+     */
+    @Event(R.id.button)
+    private void clickPop(View view){
+        // 布局管理器
+        LayoutInflater li = LayoutInflater.from(ExDialog.this);
+        // 得到需要弹出的自定义布局文件
+        // 如果自定义个布局文件中有需要得到的数据,不能直接用findById,需要带上popDialogView
+        final View popDialogView = li.inflate(R.layout.activity_ex_dialog,null);
+        AlertDialog ad = new AlertDialog.Builder(ExDialog.this).setTitle("this is a test")
+                .setView(popDialogView).setPositiveButton("OK",new DialogInterface.OnClickListener(){
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //处理事件
+                    }
+                }).setNegativeButton("cancel",new DialogInterface.OnClickListener(){
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //处理事件
+                    }
+                }).show();
+    }
+
+    /**
+     * 自定义一个带图片和文字的toast
+     * @param view
+     */
+    @Event(R.id.button)
+    private void clickToast(View view){
+        // 布局管理器
+        LayoutInflater li = LayoutInflater.from(ExDialog.this);
+        // 得到需要弹出的自定义布局文件
+        // 如果自定义个布局文件中有需要得到的数据,不能直接用findById,需要带上popDialogView
+        final View popDialogView = li.inflate(R.layout.activity_ex_dialog,null);
     }
 }
