@@ -8,7 +8,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.wy.R;
@@ -236,9 +239,18 @@ public class ExDialog extends AppCompatActivity {
     @Event(R.id.button)
     private void clickToast(View view){
         // 布局管理器
-        LayoutInflater li = LayoutInflater.from(ExDialog.this);
+        LayoutInflater li = getLayoutInflater();
         // 得到需要弹出的自定义布局文件
         // 如果自定义个布局文件中有需要得到的数据,不能直接用findById,需要带上popDialogView
-        final View popDialogView = li.inflate(R.layout.activity_ex_dialog,null);
+        // 要将布局文件中的组件转变为ViewGroup,以便调用
+        final View popDialogView = li.inflate(R.layout.activity_dialog_pop,(ViewGroup) findViewById(R.id.activity_dialog_pop));
+        ImageView username = (ImageView) popDialogView.findViewById(R.id.username);
+        EditText password = (EditText)popDialogView.findViewById(R.id.password);
+        username.setImageResource(R.drawable.test01);
+        password.setText("this is a test");
+        Toast toast = new Toast(getApplicationContext());
+        toast.setView(popDialogView);
+        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.show();
     }
 }
