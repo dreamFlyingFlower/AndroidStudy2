@@ -42,7 +42,13 @@
             android:name=".base.ExGMap"
             android:label="@string/title_activity_ex_gmap"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".sqllite.ExSql"></activity>
+        <activity android:name=".sqllite.ExSql" />
+        <!--服务注册-->
+        <service android:name=".base.ExService">
+            <intent-filter>
+                <action android:name="com.wy.service.ExService"></action>
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>
