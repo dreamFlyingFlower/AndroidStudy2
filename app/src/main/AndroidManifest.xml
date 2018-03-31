@@ -13,6 +13,8 @@
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <!-- 发送短信,短信过长的时候需要进行截取分段 -->
     <uses-permission android:name="android.permission.SEND_SMS" />
+    <!-- 允许访问网络 -->
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -43,12 +45,14 @@
             android:label="@string/title_activity_ex_gmap"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".sqllite.ExSql" />
-        <!--服务注册-->
+        <!-- 服务注册 -->
         <service android:name=".base.ExService">
             <intent-filter>
-                <action android:name="com.wy.service.ExService"></action>
+                <action android:name="com.wy.service.ExService" />
             </intent-filter>
         </service>
+
+        <activity android:name=".base.ExThread"></activity>
     </application>
 
 </manifest>
