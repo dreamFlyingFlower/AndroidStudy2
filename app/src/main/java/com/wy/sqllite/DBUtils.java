@@ -31,7 +31,7 @@ public class DBUtils extends SQLiteOpenHelper {
     }
 
     /**
-     * 操作数据库的其他方法
+     * 数据库版本文件发生变化的时候调用
      * @param db
      * @param oldVersion
      * @param newVersion
