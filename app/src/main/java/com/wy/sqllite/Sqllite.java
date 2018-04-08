@@ -7,6 +7,7 @@ package com.wy.sqllite;
 import android.content.ContentProvider;
 import android.content.ContentUris;
 import android.content.ContentValues;
+import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
@@ -32,6 +33,15 @@ import java.util.List;
 public class Sqllite extends ContentProvider {
     private static final String TAG="sqllite";
     SQLiteOpenHelper dbHelper = null;
+    private static final int RIGHT= 1;
+
+    // uri匹配方法,判断访问的uri是否匹配,构造里的常量可自行定义,也可使用系统的
+    public static final UriMatcher MATCHER = new UriMatcher(UriMatcher.NO_MATCH);
+    // 初始化需要匹配的uri:标识符,表明,匹配时的返回码,自定义
+    static{
+        MATCHER.addURI("com.wy.sqllite.provider","tablename",RIGHT);
+    }
+
     //    初始化
     @Override
     public boolean onCreate() {
@@ -74,6 +84,11 @@ public class Sqllite extends ContentProvider {
         return cursor;
     }
 
+    /**
+     * 根据uri判断是操作多条数据还是单条数据
+     * @param uri
+     * @return
+     */
     @Nullable
     @Override
     public String getType(@NonNull Uri uri) {
@@ -86,12 +101,12 @@ public class Sqllite extends ContentProvider {
     public Uri insert(@NonNull Uri uri, @Nullable ContentValues values) {
         // 获得数据库访问
         SQLiteDatabase database = dbHelper.getWritableDatabase();
-        // 忘数据库中插入数据,返回插入后生成的id
+        // 往数据库中插入数据,返回插入后生成的id,第二个参数??FIXME
         long rowid = database.insert("user", null, values);
         if(rowid > 0){
             // 将原始uri和生成的id拼接后返回
             Uri uri1 = ContentUris.withAppendedId(uri, rowid);
-            // 通知其他应用数据改变
+            // 通知其他应用数据改变,第二个参数是若数据发生改变,必然给某个应用通知
             getContext().getContentResolver().notifyChange(uri1,null);
             return uri1;
         }else{
