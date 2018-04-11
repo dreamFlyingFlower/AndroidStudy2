@@ -11,6 +11,8 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <!-- 打电话的权限 -->
     <uses-permission android:name="android.permission.CALL_PHONE" />
+    <!--监听电话的权限-->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <!-- 发送短信,短信过长的时候需要进行截取分段 -->
     <uses-permission android:name="android.permission.SEND_SMS" />
     <!-- 允许访问网络 -->
@@ -27,7 +29,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".base.Media">
+        <activity android:name=".base.ExMedia">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
