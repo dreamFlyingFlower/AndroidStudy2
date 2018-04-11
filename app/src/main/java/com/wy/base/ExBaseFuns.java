@@ -6,6 +6,8 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 
 import com.wy.R;
@@ -25,6 +27,13 @@ public class ExBaseFuns extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         // 创建实例
         super.onCreate(savedInstanceState);
+        // 需要在setContentView之前调用才有效
+        // 窗口无标题
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        // 当前窗口全屏显示
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         // 显示activity
         setContentView(R.layout.activity_base);
 
@@ -62,6 +71,8 @@ public class ExBaseFuns extends AppCompatActivity {
 
         // 销毁当前的activity
         finish();
+
+        // 元素的visibility中的gone表示开始不可见
     }
 
     /**

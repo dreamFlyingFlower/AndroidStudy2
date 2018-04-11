@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <resource key="ctrl+D">复制上一行数据</resource>
+    <resource key="ctrl+y">删除选中行</resource>
 </resources>

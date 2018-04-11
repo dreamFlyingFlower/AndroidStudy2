@@ -67,7 +67,7 @@ public class ExMedia extends AppCompatActivity {
                     break;
                 case TelephonyManager.CALL_STATE_IDLE://电话打完了
                     if(seek > 0 && audioPath != null){
-                        play();
+                        play(seek);
                         mp.seekTo(seek);
                         seek=0;
                     }
@@ -100,8 +100,7 @@ public class ExMedia extends AppCompatActivity {
     @Override
     public void onResume(){
         if(seek > 0 && audioPath != null){
-            play();
-            mp.seekTo(seek);
+            play(seek);
             seek=0;
         }
         super.onResume();
@@ -156,18 +155,18 @@ public class ExMedia extends AppCompatActivity {
         File audio = new File(Environment.getExternalStorageDirectory(),"filename");
         if(audio.exists()){
             audioPath = audio.getAbsolutePath();
-            play();
+            play(0);
         }else{
             Toast.makeText(ExMedia.this,"文件没找到",Toast.LENGTH_SHORT).show();
         }
     }
 
-    private void play() {
+    private void play(int seek) {
         try{
             mp.reset();//把各项参数恢复到初始状态,便于循环播放
             mp.setDataSource(audioPath);//设置播放资源
             mp.prepare();//进行缓冲
-            mp.setOnPreparedListener(new PrepareListener());//监听文件是否缓冲完成
+            mp.setOnPreparedListener(new PrepareListener(seek));//监听文件是否缓冲完成
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -177,11 +176,19 @@ public class ExMedia extends AppCompatActivity {
      * 需要一个实现了MediaPlayer.OnPreparedListener的类来对完成缓冲的文件进行处理
      */
     private class PrepareListener implements MediaPlayer.OnPreparedListener{
+        private Integer seek;
+
+        public PrepareListener(int seek) {
+            this.seek = seek;
+        }
 
         // 缓冲完毕之后调用该方法
         @Override
         public void onPrepared(MediaPlayer mp) {
             mp.start();//开始播放
+            if(seek > 0 && audioPath != null) {
+                mp.seekTo(seek);
+            }
         }
     }
 
@@ -208,7 +215,7 @@ public class ExMedia extends AppCompatActivity {
             mp.seekTo(0);//从开始位置播放音乐
     }else{
             if(audioPath != null){
-                play();
+                play(0);
             }
         }
     }
