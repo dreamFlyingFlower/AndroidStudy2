@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <resource key="ctrl+D">复制上一行数据</resource>
-    <resource key="ctrl+y">删除选中行</resource>
-</resources>
+<keys>
+    <key name="ctrl+D">复制上一行数据</key>
+    <key name="ctrl+y">删除选中行</key>
+    <key name="ctrl+alt+l">快速格式化代码,可能和qq的快捷键冲突,修改qq的快捷键,
+        注释不能格式化,需要设置settings--code style--java--wrapping--comment at first 什么的不勾上</key>
+    <key name="ctrl+alt+o">自动删除没有用的包</key>
+</keys>

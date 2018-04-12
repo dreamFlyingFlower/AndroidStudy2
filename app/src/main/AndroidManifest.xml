@@ -71,7 +71,8 @@
         <activity android:name=".sqllite.ExObserver" />
         <activity android:name=".base.ExChange" />
         <activity android:name=".base.ExSurface" />
-        <activity android:name=".base.ExGestrue"></activity>
+        <activity android:name=".base.ExGestrue" />
+        <activity android:name=".custom.CusLinearlayout"></activity>
     </application>
 
 </manifest>
