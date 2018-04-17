@@ -72,7 +72,8 @@
         <activity android:name=".base.ExChange" />
         <activity android:name=".base.ExSurface" />
         <activity android:name=".base.ExGestrue" />
-        <activity android:name=".custom.CusLinearlayout"></activity>
+        <activity android:name=".custom.CusLinearlayout" />
+        <activity android:name=".custom.CusTagHost"></activity>
     </application>
 
 </manifest>
