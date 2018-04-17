@@ -33,6 +33,8 @@ public class ExEventBusRegister extends AppCompatActivity {
         // 可以根据post的参数的类型来找到指定的方法进行处理
         // register只是能收到通知,并不能处理发布的事件,处理发布事件需要另外的处理方法
         // ****最重要的是注册需要在发布之前调用,否则收不到发布者的信息
+        // ****也可以不用在本类中调用register方法,传入本类,
+        // ****也可以在其他类中调用调用register方法,传入本对象即可,那样可以保证本类一定会收到发布者的消息
         EventBus.getDefault().register(this);
 
         // 解除事件订阅

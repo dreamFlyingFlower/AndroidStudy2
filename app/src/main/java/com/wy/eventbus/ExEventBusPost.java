@@ -32,6 +32,8 @@ public class ExEventBusPost extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         x.view().inject(this);
+        // 在本类中对ExEventBusRegister进行注册,可保证本类发布的小心ExEventBusRegister必然可收到
+        EventBus.getDefault().register(new ExEventBusRegister());
     }
 
     @Event(value=R.id.jump)
