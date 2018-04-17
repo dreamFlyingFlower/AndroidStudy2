@@ -17,6 +17,8 @@
     <uses-permission android:name="android.permission.SEND_SMS" />
     <!-- 允许访问网络 -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <!--访问网络状态的权限-->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <!-- 读通讯录的权限 -->
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <!-- 写通讯录的权限 -->
@@ -29,6 +31,13 @@
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <!-- 使用sd卡权限 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!--发送粘性广播的权限-->
+    <uses-permission android:name="android.permission.SET_TIME_ZONE" />
+
+    <!--自定义一个权限,主要是广播接收的时候定义个一个权限-->
+    <permission android:name="com.custom.this.privilege" />
+    <!--使用自定义的权限,或者是两个不同的应用中,一个申明自定义的权限,一个使用-->
+    <uses-permission android:name="com.custom.this.privilege" />
 
     <application
         android:allowBackup="true"
@@ -75,6 +84,27 @@
         <activity android:name=".custom.CusLinearlayout" />
         <activity android:name=".custom.CusTagHost" />
         <activity android:name=".eventbus.ExEventBusRegister" />
+        <activity android:name=".base.ExBroadSend" />
+
+        <!--注册广播接收器-->
+        <receiver android:name=".base.ExBroadReceive">
+            <!--优先级-1000到1000-->
+            <intent-filter android:priority="100">
+                <!--注册接收广播的标识-->
+                <action android:name="com.wy.base.ExBroadReceiver"/>
+            </intent-filter>
+        </receiver>
+
+        <!--检查网络变化的广播接收者-->
+        <receiver
+            android:name=".base.ExNetWork"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
