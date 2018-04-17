@@ -16,4 +16,5 @@
     <string name="error_incorrect_password">密码不正确</string>
     <string name="title_activity_ex_gmap">ExGMap</string>
     <string name="title_activity_media">Media</string>
+    <string name="title_activity_ex_event_bus_post">ExEventBusPost</string>
 </resources>
