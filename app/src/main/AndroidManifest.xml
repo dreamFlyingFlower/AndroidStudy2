@@ -82,23 +82,20 @@
         <activity android:name=".custom.CusTagHost" />
         <activity android:name=".eventbus.ExEventBusRegister" />
         <activity android:name=".base.ExBroadSend" />
-        <activity android:name="com.wy.base.ExMenu" >
+        <activity android:name=".base.ExMenu" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <!--注册广播接收器-->
-        <receiver android:name=".base.ExBroadReceive">
-            <!--多个相同的activity或其他组件启动时,只启动优先级高的,优先级-1000到1000-->
-            <intent-filter android:priority="100">
-                <!--注册接收广播的标识-->
-                <action android:name="com.wy.base.ExBroadReceiver" />
-            </intent-filter>
-        </receiver>
-
+        <!--注册广播接收器,不知为何会报错-->
+        <!--<receiver android:name=".base.ExBroadReceive">-->
+            <!--&lt;!&ndash;多个相同的activity或其他组件启动时,只启动优先级高的,优先级-1000到1000&ndash;&gt;-->
+            <!--<intent-filter>-->
+                <!--&lt;!&ndash;注册接收广播的标识&ndash;&gt;-->
+                <!--<action android:name="com.wy.base.ExBroadReceiver" />-->
+            <!--</intent-filter>-->
+        <!--</receiver>-->
         <!--检查网络变化的广播接收者-->
         <receiver
             android:name=".base.ExNetWork"
@@ -109,6 +106,6 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </receiver>
-
     </application>
+
 </manifest>
