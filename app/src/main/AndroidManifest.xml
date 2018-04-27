@@ -46,13 +46,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".eventbus.ExEventBusPost">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".eventbus.ExEventBusPost"/>
         <activity android:name=".base.ExClick" />
         <activity android:name=".base.ExEvent" />
         <!-- 广播注册 -->
@@ -70,10 +64,13 @@
         <activity android:name=".sqllite.ExSql" />
         <!-- 服务注册 -->
         <service android:name=".base.ExService">
-            <intent-filter>
+            <intent-filter android:priority="800">
                 <action android:name="com.wy.service.ExService" />
             </intent-filter>
         </service>
+        <service
+            android:name="com.wy.base.ExIntentService"
+            android:exported="false"></service>
 
         <activity android:name=".base.ExThread" />
         <activity android:name=".base.CustomAdapter" />
@@ -81,17 +78,24 @@
         <activity android:name=".base.ExChange" />
         <activity android:name=".base.ExSurface" />
         <activity android:name=".base.ExGestrue" />
-        <activity android:name=".custom.CusLinearlayout" />
+        <!--<activity android:name=".custom.CusLinearlayout" />-->
         <activity android:name=".custom.CusTagHost" />
         <activity android:name=".eventbus.ExEventBusRegister" />
         <activity android:name=".base.ExBroadSend" />
+        <activity android:name="com.wy.base.ExMenu" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <!--注册广播接收器-->
         <receiver android:name=".base.ExBroadReceive">
-            <!--优先级-1000到1000-->
+            <!--多个相同的activity或其他组件启动时,只启动优先级高的,优先级-1000到1000-->
             <intent-filter android:priority="100">
                 <!--注册接收广播的标识-->
-                <action android:name="com.wy.base.ExBroadReceiver"/>
+                <action android:name="com.wy.base.ExBroadReceiver" />
             </intent-filter>
         </receiver>
 
@@ -101,10 +105,10 @@
             android:enabled="true"
             android:exported="true">
             <intent-filter>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
-                <category android:name="android.intent.category.DEFAULT"/>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </receiver>
-    </application>
 
+    </application>
 </manifest>

@@ -1,9 +1,14 @@
 package com.wy.base;
 
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
@@ -38,7 +43,10 @@ public class ExBaseFuns extends AppCompatActivity {
         setContentView(R.layout.activity_base);
 
         /**
-         *  意图,activity之间的切换
+         *  意图,activity之间的切换,启动一个activity有4种模式
+         *  Intent的组成部分:component组件,目的组件;action动作,用来表现意图的行动;
+         *  category类别,用来表现动作的类别;data数据;type数据类型,对data返利的描写;extras扩展信息;
+         *  flags标志位,期望这个意图的运行方式
          */
         Intent intent = new Intent(ExBaseFuns.this,ExChange.class);
         // 或者另外一种方式
@@ -63,6 +71,12 @@ public class ExBaseFuns extends AppCompatActivity {
         // 第二个参数是本activity的识别码,用于当下一个activity处理完数据之后找到本activity,可自定义
         startActivityForResult(intent,10000);
 
+        // 相当于打开一个网页,结合type使用(type就是contenttype的mime类型)也可打开其他类型的文件
+        intent.setAction(Intent.ACTION_VIEW);
+        Uri uri = Uri.parse("http://www.baidu.com");
+        intent.setData(uri);
+        startActivity(intent);
+
         // 拿到图片的字节数组之后显示到acitvity中,字节数组可以通过各种方式拿到
         // bitmap是位图,可以有多种方式显示图片
         byte[] bs = new byte[1024];
@@ -73,6 +87,47 @@ public class ExBaseFuns extends AppCompatActivity {
         finish();
 
         // 元素的visibility中的gone表示开始不可见
+
+        // 启动一个service
+        Intent service = new Intent(this,ExService.class);
+        startService(service);
+
+        //通过bindservice启动一个service,服务链接对象,是回调函数,绑定服务的标记
+        bindService(service, new ServiceConnection() {
+            /**
+             * 绑定成功服务的回调方法
+             * @param name
+             * @param service
+             */
+            @Override
+            public void onServiceConnected(ComponentName name, IBinder service) {
+
+            }
+
+            /**
+             * 断开链接或服务异常的时候调用方法,解除绑定的时候不会调用
+             * @param name
+             */
+            @Override
+            public void onServiceDisconnected(ComponentName name) {
+
+         }
+        }, Context.BIND_AUTO_CREATE);
+
+        /**
+         * 解除绑定
+         */
+        unbindService(new ServiceConnection() {
+            @Override
+            public void onServiceConnected(ComponentName name, IBinder service) {
+
+            }
+
+            @Override
+            public void onServiceDisconnected(ComponentName name) {
+
+            }
+        });
     }
 
     /**
@@ -86,4 +141,15 @@ public class ExBaseFuns extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
     }
+
+    /**
+     * 一个activity的生命周期
+     * onCreate:当activity被创建时调用,相当于初始化,之后必然会调用onStart
+     * onStart:当activity可看见时被调用,之后会调用onResume或onStop
+     * onRestart:当activity重新可见的时候被调用,之后一定会调用onStart
+     * onResume:被onStart调用,此时acticity可见,之后可调用onPause
+     * onPause:activity被放到后台进程中,当内存不足时可能会被kill,之后会调用onStop或onResume
+     * onStop:activity完全不可见调用,当内存不足时可能会被kill
+     * onDestory:销毁时调用,被系统kill
+     */
 }
