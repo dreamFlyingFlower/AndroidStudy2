@@ -21,6 +21,8 @@ import com.wy.R;
  * Created by wanyang on 2018/4/8.
  * android的一些基本方法
  * 与之交互的是Exchange中的方法
+ * 自定义适配器,继承BasicAdapter,网上查找
+ * 使用progressDialog,进度条,网上查找
  * FIXME
  */
 public class ExBaseFuns extends AppCompatActivity {
