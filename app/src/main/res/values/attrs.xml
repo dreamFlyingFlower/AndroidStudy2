@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--自定义属性资源文件-->
+<!--attr子元素的属性:format:表示这个属性的值鄂类型-->
+<!--1reference:参考指定theme中资源id,属于引用资源-->
+<!--2string:字符串,也可以写成string|reference,表示即可以自己写,也可以引用-->
+<!--3color:颜色-->
+<!--4boolean-->
+<!--5dimension:尺寸值-->
+<!--6float;7integer;8fraction:百分数-->
+<!--9enum;10flag:位或运算-->
+<resources>
+    <declare-styleable name="default">
+        <attr name="color" format="color">#fff</attr>
+    </declare-styleable>
+</resources>

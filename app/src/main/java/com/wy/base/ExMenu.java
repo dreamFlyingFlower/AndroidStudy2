@@ -9,6 +9,7 @@ import android.widget.Toast;
 import com.wy.R;
 
 /**
+ * 3种菜单:options菜单,手机上的菜单键点击出现的菜单,context menu上下文菜单,pop弹出菜单
  * 一个菜单类,需要现在资源文件中新建一个menu文件夹,在文件中新建一个menu resourcexml文件
  * 根元素是menu,子元素是item或group
  *
@@ -23,7 +24,7 @@ public class ExMenu extends AppCompatActivity {
     }
 
     /**
-     * 加载菜单选项
+     * 加载options菜单选项
      * @param menu
      * @return
      */

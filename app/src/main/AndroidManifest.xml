@@ -73,7 +73,7 @@
             android:exported="false" />
 
         <activity android:name=".base.ExThread" />
-        <activity android:name=".base.CustomAdapter" />
+        <activity android:name=".custom.CustomAdapter" />
         <activity android:name=".sqllite.ExObserver" />
         <activity android:name=".base.ExChange" />
         <activity android:name=".base.ExSurface" />

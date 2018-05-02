@@ -23,6 +23,9 @@ import com.wy.R;
  * 与之交互的是Exchange中的方法
  * 自定义适配器,继承BasicAdapter,网上查找
  * 使用progressDialog,进度条,网上查找
+ * ViewFlipper的使用,activity之间的切换
+ * ImageSwitcher和TextSwitcher,图片,文本之间的切换,如幻灯片
+ * ExpandableList:listview的扩展组件,2级分组,如qq分组
  * FIXME
  */
 public class ExBaseFuns extends AppCompatActivity {
