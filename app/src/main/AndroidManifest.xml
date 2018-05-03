@@ -110,7 +110,9 @@
         </receiver>
 
         <activity android:name=".base.ExAutocompleteText" />
-        <activity android:name=".base.ExSpinner"></activity>
+        <activity android:name=".base.ExSpinner" />
+        <activity android:name=".base.ExToggleButton" />
+        <activity android:name=".base.ExListView"></activity>
     </application>
 
 </manifest>

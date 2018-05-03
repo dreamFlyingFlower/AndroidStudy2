@@ -26,6 +26,9 @@ import com.wy.R;
  * ViewFlipper的使用,activity之间的切换
  * ImageSwitcher和TextSwitcher,图片,文本之间的切换,如幻灯片
  * ExpandableList:listview的扩展组件,2级分组,如qq分组
+ * GridView组件,和table一样,通常用来显示图片
+ * ListView自定义方式,自定义apapter数据源
+ * listView优化:使用ConvertView,使用ViewHolder来提高组件在容器中查找的效率
  * FIXME
  */
 public class ExBaseFuns extends AppCompatActivity {

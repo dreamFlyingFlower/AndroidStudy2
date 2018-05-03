@@ -2,8 +2,12 @@ package com.wy.base;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import com.wy.R;
@@ -21,6 +25,9 @@ public class ExMenu extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ex_menu);
+
+        // 注册上下文菜单,需要绑定在一个view上
+        registerForContextMenu(null);
     }
 
     /**
@@ -32,11 +39,15 @@ public class ExMenu extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         //填充选项菜单,读取xml文件
         getMenuInflater().inflate(R.menu.test,menu);
+        // 动态添加菜单项
+        // 组别编号,菜单项编号,排序,标题
+//        menu.add(1,1,100,"项目1");
+//        menu.add(1,2,200,"项目2");
         return super.onCreateOptionsMenu(menu);
     }
 
     /**
-     * 当选中某个菜单的时候需要做的操作
+     * 当选中某个options菜单的时候需要做的操作
      * @param item
      * @return
      */
@@ -62,5 +73,38 @@ public class ExMenu extends AppCompatActivity {
 
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * 上下文菜单,创建上下文菜单
+     * @param menu
+     * @param v
+     * @param menuInfo
+     */
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        getMenuInflater().inflate(R.menu.test,menu);
+    }
+
+    /**
+     * 上下文菜单项目响应事件
+     * @param item
+     * @return
+     */
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        return super.onContextItemSelected(item);
+    }
+
+    /**
+     * 弹出菜单
+     * @param view
+     */
+    public void popMenu(View view){
+        PopupMenu popupMenu = new PopupMenu(this,view);
+        MenuInflater menuInflater = popupMenu.getMenuInflater();
+        menuInflater.inflate(R.menu.test,popupMenu.getMenu());
+        popupMenu.show();
     }
 }
