@@ -82,13 +82,7 @@
         <activity android:name=".custom.CusTagHost" />
         <activity android:name=".eventbus.ExEventBusRegister" />
         <activity android:name=".base.ExBroadSend" />
-        <activity android:name=".base.ExMenu">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".base.ExMenu" />
         <!-- 注册广播接收器,不知为何会报错 -->
         <!-- <receiver android:name=".base.ExBroadReceive"> -->
         <!-- &lt;!&ndash;多个相同的activity或其他组件启动时,只启动优先级高的,优先级-1000到1000&ndash;&gt; -->
@@ -110,7 +104,20 @@
         </receiver>
 
         <activity android:name=".base.ExAutocompleteText" />
-        <activity android:name=".base.ExSpinner"></activity>
+        <activity android:name=".base.ExSpinner" />
+        <activity
+            android:name=".base.ExSetting"
+            android:label="@string/title_activity_ex_setting">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".base.ExPackage" />
+        <activity android:name=".base.ExEnvironment" />
+        <activity android:name=".base.ExSensor" />
+        <activity android:name=".fragment.ExMainFragment"></activity>
     </application>
 
 </manifest>

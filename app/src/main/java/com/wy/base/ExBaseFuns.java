@@ -8,7 +8,11 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Message;
+import android.os.Messenger;
+import android.os.RemoteException;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
@@ -28,6 +32,8 @@ import com.wy.R;
 public class ExBaseFuns extends AppCompatActivity {
 
     private ImageView iv;
+    // 生命一个信使,用来让activity和service进行通讯
+    private Messenger messenger;
 
     // 当切换到本activity时会首先调用onCreate方法
     @Override
@@ -80,7 +86,7 @@ public class ExBaseFuns extends AppCompatActivity {
         startActivity(intent);
 
         // 拿到图片的字节数组之后显示到acitvity中,字节数组可以通过各种方式拿到
-        // bitmap是位图,可以有多种方式显示图片
+        // bitmap是位图,可以有多种方式显示图片,图片过大需要进行压缩处理,网上查找
         byte[] bs = new byte[1024];
         Bitmap bitmap = BitmapFactory.decodeByteArray(bs,0,bs.length);
         iv.setImageBitmap(bitmap);
@@ -99,11 +105,11 @@ public class ExBaseFuns extends AppCompatActivity {
             /**
              * 绑定成功服务的回调方法
              * @param name
-             * @param service
+             * @param binder
              */
             @Override
-            public void onServiceConnected(ComponentName name, IBinder service) {
-
+            public void onServiceConnected(ComponentName name, IBinder binder) {
+                messenger = new Messenger(binder);
             }
 
             /**
@@ -112,9 +118,33 @@ public class ExBaseFuns extends AppCompatActivity {
              */
             @Override
             public void onServiceDisconnected(ComponentName name) {
-
-         }
+                messenger = null;
+            }
         }, Context.BIND_AUTO_CREATE);
+
+        // 需要往service中发送的消息
+        Message msg = Message.obtain();
+        // 在service中需要进行辨识的唯一标识符
+        msg.what = 1;
+        // 数据
+        msg.obj = "test";
+
+        // 处理service回传回来的值
+        Messenger reply = new Messenger(new Handler(){
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                // 通过reply拿到的msg处理service回传的消息
+                Object obj = msg.obj;
+            }
+        });
+        try {
+            messenger.send(msg);
+            // 将service回传的消息赋值给reply
+            msg.replyTo = reply;
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
 
         /**
          * 解除绑定

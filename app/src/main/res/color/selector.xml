@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--android当选中或不选中呈现不同的样式,当在样式中使用这个的时候,需使用@color/文件名-->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--默认值-->
+    <item android:color="#fff000"></item>
+    <!--按钮按下时,获得焦点时等呈现的颜色-->
+    <item android:state_pressed="true" android:color="#000"/>
+    <item android:state_focused="true" android:color="#000"/>
+    <item android:state_checked="true" android:color="#000"/>
+    <item android:state_active="true" android:color="#000"/>
+    <item android:state_first="true" android:color="#000"/>
+</selector>

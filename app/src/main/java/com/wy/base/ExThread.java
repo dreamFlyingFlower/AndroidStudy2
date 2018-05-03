@@ -10,6 +10,7 @@ import com.wy.R;
 /**
  * 多线程,在android中,只能有一个主线程,就是当前的activity线程,若是启动了一个子线程,而且子线程对主线程进行了更改
  * 则子线程必须通知主线程做了更改
+ * android的线程池是Async,网上查找资料吧
  */
 public class ExThread extends AppCompatActivity {
 

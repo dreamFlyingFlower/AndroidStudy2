@@ -2,7 +2,11 @@ package com.wy.base;
 
 import android.app.Service;
 import android.content.Intent;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Message;
+import android.os.Messenger;
+import android.os.RemoteException;
 import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
 import com.wy.R;
@@ -31,6 +35,30 @@ import org.xutils.view.annotation.ContentView;
  */
 @ContentView(R.layout.activity_ex_service)
 public class ExService extends Service {
+
+    // 通过信使来处理activity传过来的消息
+    final Messenger messenger = new Messenger(new handlerMsg());
+
+    // 回传消息给activity
+    Messenger remessage;
+    
+    // 处理从activity传过来的消息
+    class handlerMsg extends Handler{
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if(msg.what == 1){
+                //需要进行的操作
+                Object obj = msg.obj;
+                remessage = msg.replyTo;
+                try {
+                    remessage.send(msg);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 
     /**
      * 当服务被远程调用的时候,即被bindservice的时候,该方法返回值

@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 /**
  * Created by Tinkpad X220 on 2018/3/29.
+ * LoadManager的使用,异步加载数据
  */
 
 public class DBUtils extends SQLiteOpenHelper {
