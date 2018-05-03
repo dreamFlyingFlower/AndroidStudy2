@@ -12,6 +12,7 @@ import android.view.View;
 
 import com.wy.R;
 
+
 /**
  * 自定义组件3种方法:
  * 1继承ViewGroup或其子layout类等布局进行组合

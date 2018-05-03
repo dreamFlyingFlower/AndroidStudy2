@@ -9,7 +9,11 @@
 <!--6float;7integer;8fraction:百分数-->
 <!--9enum;10flag:位或运算-->
 <resources>
-    <declare-styleable name="default">
+    <declare-styleable name="CustomView">
         <attr name="color" format="color">#fff</attr>
+        <attr name="exampleString" format="string" />
+        <attr name="exampleColor" format="color"/>
+        <attr name="exampleDimension" format="dimension"/>
+        <attr name="exampleDrawable" format="color|reference"/>
     </declare-styleable>
 </resources>
