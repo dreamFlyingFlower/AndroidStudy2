@@ -1,18 +1,20 @@
 package com.wy.base;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.ContextMenu;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import com.wy.R;
 
 /**
+ * 3种菜单:options菜单,手机上的菜单键点击出现的菜单,context menu上下文菜单,pop弹出菜单
  * 一个菜单类,需要现在资源文件中新建一个menu文件夹,在文件中新建一个menu resourcexml文件
  * 根元素是menu,子元素是item或group
  *
@@ -75,7 +77,7 @@ public class ExMenu extends AppCompatActivity {
     }
 
     /**
-     * 加载固定菜单选项,菜单会在屏幕下方出现
+     * 加载options菜单选项
      * @param menu
      * @return
      */
@@ -83,11 +85,16 @@ public class ExMenu extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         //填充选项菜单,读取xml文件
         getMenuInflater().inflate(R.menu.test,menu);
+        // 动态添加菜单项
+        // 组别编号,菜单项编号,排序,标题
+//        menu.add(1,1,100,"项目1");
+//        menu.add(1,2,200,"项目2");
         return super.onCreateOptionsMenu(menu);
     }
 
     /**
      * 固定菜单,选中某个菜单的时候需要做的操作
+     * 当选中某个options菜单的时候需要做的操作
      * @param item
      * @return
      */
@@ -113,5 +120,16 @@ public class ExMenu extends AppCompatActivity {
 
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * 弹出菜单
+     * @param view
+     */
+    public void popMenu(View view){
+        PopupMenu popupMenu = new PopupMenu(this,view);
+        MenuInflater menuInflater = popupMenu.getMenuInflater();
+        menuInflater.inflate(R.menu.test,popupMenu.getMenu());
+        popupMenu.show();
     }
 }

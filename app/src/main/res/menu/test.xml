@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <!--showasaction的5种显示方式:never,ifRoom有空间才显示,always总是显示-->
+    <!--withtext只显示文本,collapseActionView默认点击显示-->
     <item android:id="@+id/test01"
+        app:showAsAction="collapseActionView"
         android:title="@string/app_name"/>
     <item android:id="@+id/test02"
         android:title="@string/app_name"/>

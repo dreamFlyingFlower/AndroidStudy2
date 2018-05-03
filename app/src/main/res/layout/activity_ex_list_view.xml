@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.wy.base.ExListView">
+
+    <!--cacheColorHint:设置拖动背景色-->
+    <!--dividerHeight:listview item之间的高度-->
+    <!--divider:item之间的背景或颜色-->
+    <!--drawSelectorOnTop:点击某记录不放,颜色会在记录的后面成为背景色-->
+    <!--scrollbars:只有值为里面的值的时候才显示滚动条,并会自动隐藏和显示-->
+    <!--fastScrollEnabled:快速滚动效果,快速滚动的时候会出现一个小方块-->
+    <!--listSelector:item选中的颜色-->
+    <!--entries:设置列表填充的静态内容-->
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:cacheColorHint="#fff"
+        android:dividerHeight="30dp"
+        android:divider="@drawable/test01"
+        android:drawSelectorOnTop="false"
+        android:scrollbars="horizontal|none"
+        android:fastScrollEnabled="false"
+        android:listSelector="@color/colorAccent"
+        android:entries="@array/autocompletetext"
+        >
+    </ListView>
+
+</android.support.constraint.ConstraintLayout>

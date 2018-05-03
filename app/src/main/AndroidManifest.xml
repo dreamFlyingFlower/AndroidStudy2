@@ -73,7 +73,7 @@
             android:exported="false" />
 
         <activity android:name=".base.ExThread" />
-        <activity android:name=".base.CustomAdapter" />
+        <activity android:name=".custom.CustomAdapter" />
         <activity android:name=".sqllite.ExObserver" />
         <activity android:name=".base.ExChange" />
         <activity android:name=".base.ExSurface" />
@@ -118,6 +118,8 @@
         <activity android:name=".base.ExEnvironment" />
         <activity android:name=".base.ExSensor" />
         <activity android:name=".fragment.ExMainFragment"></activity>
+        <activity android:name=".base.ExToggleButton" />
+        <activity android:name=".base.ExListView"></activity>
     </application>
 
 </manifest>

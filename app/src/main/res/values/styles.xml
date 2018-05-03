@@ -16,4 +16,16 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+    <!--自定义样式,在layout文件中引用的时候@style/自定义样式的name,parent是指定继承样式,只能指定系统内置的样式-->
+    <!--自定义样式是将系统样式统一封装的方式-->
+    <style name="cus_color">
+        <item name="android:hint">请等待....</item>
+        <item name="android:layout_height">500dp</item>
+    </style>
+    <!--不用parent,直接继承cus_color的样式,并且自定义属于自己的样式,调用的时候@style/cus_color.font-->
+    <!--若有多级样式属性,可写多级-->
+    <style name="cus_color.font">
+        <item name="android:hint">请等待....</item>
+        <item name="android:layout_height">500dp</item>
+    </style>
 </resources>

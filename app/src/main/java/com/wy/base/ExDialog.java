@@ -1,9 +1,8 @@
 package com.wy.base;
 
+import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v4.view.LayoutInflaterFactory;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -46,6 +45,7 @@ public class ExDialog extends AppCompatActivity {
     @Event(value = R.id.button)
     private void click2(View view) {
         AlertDialog alert2 = new AlertDialog.Builder(ExDialog.this)
+                .setCancelable(false)//默认点击页面其他地方不能取消对话框
                 .setIcon(R.drawable.test01)
                 .setTitle("两键按钮")
                 .setMessage("你到底是想干什么呢,啊啊, 啊啊,啊,啊")
@@ -61,6 +61,12 @@ public class ExDialog extends AppCompatActivity {
                         //操作
                     }
                 }).create();
+        // 布局填充函数,将其他的布局嵌入到当前view中
+//        LayoutInflater inflater = getLayoutInflater();
+//        // 获得需要填充到当前view中的子组件
+//        View inflate = inflater.inflate(R.layout.activity_action_bar, null);
+//        // 将自定义的布局填充到父组件中
+//        alert2.setView(inflate);
         alert2.show();
     }
 
@@ -252,5 +258,20 @@ public class ExDialog extends AppCompatActivity {
         toast.setView(popDialogView);
         toast.setDuration(Toast.LENGTH_SHORT);
         toast.show();
+    }
+
+    /**
+     * 自定义一个列表
+     */
+    public void custom(View view){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final String[] items = new String[]{"测试1","测试2","测试4"};
+        builder.setItems(items, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(ExDialog.this,items[which],Toast.LENGTH_SHORT).show();
+            }
+        });
+        builder.show();
     }
 }

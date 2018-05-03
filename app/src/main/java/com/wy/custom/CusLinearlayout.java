@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.wy.R;
 
 /**
+ * 自定义组件
  * 自定义一个线性布局,构造函数的参数意义
  */
 public class CusLinearlayout extends LinearLayout {
