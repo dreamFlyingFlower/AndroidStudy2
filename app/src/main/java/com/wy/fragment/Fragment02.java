@@ -1,25 +1,28 @@
 package com.wy.fragment;
 
-import android.app.Fragment;
+import android.app.ListFragment;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.wy.R;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link Fragment01.OnFragmentInteractionListener} interface
+ * {@link Fragment02.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link Fragment01#newInstance} factory method to
+ * Use the {@link Fragment02#newInstance} factory method to
  * create an instance of this fragment.
- * 此处Fragment应该继承app.Fragment,v4是低版本的,不需要
+ * listFragment是干嘛的,网上查找
  */
-public class Fragment01 extends Fragment {
+public class Fragment02 extends ListFragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -31,7 +34,10 @@ public class Fragment01 extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public Fragment01() {
+    // listFragment需要绑定一个适配器
+    private ArrayAdapter<String> arrayAdapter;
+
+    public Fragment02() {
         // Required empty public constructor
     }
 
@@ -41,11 +47,11 @@ public class Fragment01 extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment Fragment01.
+     * @return A new instance of fragment Fragment02.
      */
     // TODO: Rename and change types and number of parameters
-    public static Fragment01 newInstance(String param1, String param2) {
-        Fragment01 fragment = new Fragment01();
+    public static Fragment02 newInstance(String param1, String param2) {
+        Fragment02 fragment = new Fragment02();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -53,36 +59,25 @@ public class Fragment01 extends Fragment {
         return fragment;
     }
 
-    /**
-     * 加载ui布局,返回一个fragment的ui,如果这个fragment没有ui,可返回null
-     * @param inflater 布局加载器
-     * @param container
-     * @param savedInstanceState
-     * @return
-     */
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // 获得从activity传来的值
-        getArguments();
-        // Inflate the layout for this fragment,系统自带
-        //  return inflater.inflate(R.layout.fragment_fragment01, container, false);
-        // 返回一个自定义的fragment视图
-        return inflater.inflate(R.layout.fragment_fragment01,null);
-    }
-
-    /**
-     * 初始化,之后会立刻调用onCreateView,只会调用一次
-     * @param savedInstanceState
-     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // 获得从activity中传过来的值
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        // 实例化数据源,适配器
+        arrayAdapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,
+                getResources().getStringArray(R.array.autocompletetext));
+        // 绑定数据
+        setListAdapter(arrayAdapter);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_fragment02, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -122,5 +117,17 @@ public class Fragment01 extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    /**
+     * 点击每一个fragment触发的事件
+     * @param l
+     * @param v
+     * @param position
+     * @param id
+     */
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
     }
 }

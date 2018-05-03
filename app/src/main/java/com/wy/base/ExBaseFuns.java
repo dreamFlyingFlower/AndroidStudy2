@@ -33,6 +33,9 @@ import com.wy.R;
  * GridView组件,和table一样,通常用来显示图片
  * ListView自定义方式,自定义apapter数据源
  * listView优化:使用ConvertView,使用ViewHolder来提高组件在容器中查找的效率
+ * trween动画
+ * 基本图形绘制
+ * surfaceview的使用
  * FIXME
  */
 public class ExBaseFuns extends AppCompatActivity {

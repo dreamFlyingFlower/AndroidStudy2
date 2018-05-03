@@ -31,9 +31,20 @@ public class ExMainFragment extends AppCompatActivity {
         fm = getFragmentManager();
         ft = fm.beginTransaction();
         Fragment01 f01 = new Fragment01();
+        // 从activity传值到fragment
+        f01.setArguments(new Bundle());
+        // 添加fragment到activity中有多种方法,可网上查找
         // 添加一个碎片到某个容器中
         ft.add(R.id.frags, f01);
         // 提交之后才能真正添加到容器中
+        ft.commit();
+
+        // 回退栈,当有多个fragment的时候,当回退的时候需要进行回退栈的处理,否则不会达到预期的效果
+        // 当从一个fragmeng跳到另外一个fragment的时候,用replace方法
+        // 需要进行替代的父容器,需要显示的fragment,唯一标识符
+        ft.replace(R.id.frags,f01,"fragment01");
+        // 添加到activity管理的回退栈中
+        ft.addToBackStack("fragment01");
         ft.commit();
 
     }
