@@ -28,4 +28,23 @@
         <item name="android:hint">请等待....</item>
         <item name="android:layout_height">500dp</item>
     </style>
+
+    <!--自定义通用样式,可选父类,可选系统参数以及系统值-->
+    <style name="parentStyle">
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:layout_width">fill_parent</item>
+    </style>
+
+    <!--通用样式下的子样式,也可以用上面那种方法,直接点-->
+    <style name="childStyle" parent="parentStyle">
+        <item name="android:color">#ddd000</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <!--自定义主题,不仅可以修改宽高,还可以修改全屏,动作条等-->
+    <!--?后面紧跟另外一种样式代表,当前样式随着跟随的样式改变而改变-->
+    <style name="custheme">
+        <item name="android:windowActionBar">true</item>
+        <item name="android:windowFullscreen">?android:windowActionBar</item>
+    </style>
 </resources>
