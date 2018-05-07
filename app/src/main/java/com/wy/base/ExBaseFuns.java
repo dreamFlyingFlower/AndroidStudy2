@@ -4,6 +4,8 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -58,6 +60,18 @@ public class ExBaseFuns extends AppCompatActivity {
 
         // 显示activity
         setContentView(R.layout.activity_base);
+
+        // 从AndroidManifest.xml中拿meta-data的数据,其中的数据是放在一个bundle中
+        try {
+            ActivityInfo activityInfo = this.getPackageManager().getActivityInfo(new
+                            ComponentName(this, ExBaseFuns.class),
+                    PackageManager.GET_META_DATA);
+            Bundle data = activityInfo.metaData;
+            data.getString("tests1");
+
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
 
         /**
          *  意图,activity之间的切换,启动一个activity有4种模式

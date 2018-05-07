@@ -117,9 +117,12 @@
         <activity android:name=".base.ExPackage" />
         <activity android:name=".base.ExEnvironment" />
         <activity android:name=".base.ExSensor" />
-        <activity android:name=".fragment.ExMainFragment"></activity>
+        <activity android:name=".fragment.ExMainFragment"/>
         <activity android:name=".base.ExToggleButton" />
-        <activity android:name=".base.ExListView"></activity>
+        <activity android:name=".base.ExListView"/>
+        <activity android:name=".base.ExBaseFuns">
+            <meta-data android:name="test1" android:value="example1"/>
+        </activity>
     </application>
 
 </manifest>
